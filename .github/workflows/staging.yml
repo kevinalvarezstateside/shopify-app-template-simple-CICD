@@ -5,7 +5,7 @@ on:
       - staging
 jobs:
   CI:
-    name: CI_Node_${{ matrix.version }}
+    name: Deploy and Publish
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -15,7 +15,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.version }}
-      - name: Install npm dependencies
+      - name: Install node dependencies
         run: yarn install
       - name: Install Shopify CLI
         run: yarn global add @shopify/cli@latest
