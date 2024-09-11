@@ -1,22 +1,24 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
 client_id = "1b2e3f4387c94a0b6384c3e4671f7116"
-name = "sta remix base app"
-handle = "sta-remix-base-app"
-application_url = "https://shopify.dev/apps/default-app-home"
+name = "sta-remix-base-app"
+handle = "prd-remix-base-app"
+application_url = "https://process-biographies-hostels-intention.trycloudflare.com/"
 embedded = true
 
 [build]
-automatically_update_urls_on_dev = false
-dev_store_url = "pet-store-dev.myshopify.com"
 include_config_on_deploy = true
 
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
-scopes = ""
+scopes = "write_products"
 
 [auth]
-redirect_urls = [ "https://shopify.dev/apps/default-app-home/api/auth" ]
+redirect_urls = [
+  "https://process-biographies-hostels-intention.trycloudflare.com/auth/callback",
+  "https://process-biographies-hostels-intention.trycloudflare.com/auth/shopify/callback",
+  "https://process-biographies-hostels-intention.trycloudflare.com/api/auth/callback"
+]
 
 [webhooks]
 api_version = "2024-07"
