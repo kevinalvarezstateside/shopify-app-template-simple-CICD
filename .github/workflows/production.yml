@@ -1,8 +1,8 @@
-name: Deploy to STA
+name: Deploy to PRD
 on:
   push:
     branches:
-      - staging
+      - main
 jobs:
   CI:
     name: Deploy and Publish
@@ -25,5 +25,5 @@ jobs:
           SHOPIFY_CLI_PARTNERS_TOKEN: ${{ secrets.SHOPIFY_CLI_PARTNERS_TOKEN }}
           COMMIT_URL: ${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}
           # .env content after a deploy
-          SHOPIFY_API_KEY: ${{ secrets.STA_SHOPIFY_API_KEY }}
+          SHOPIFY_API_KEY: ${{ secrets.LIVE_SHOPIFY_API_KEY }}
         run: shopify app deploy -f --source-control-url "$COMMIT_URL"
