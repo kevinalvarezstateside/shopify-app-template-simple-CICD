@@ -1,0 +1,29 @@
+name: Deploy to PRD
+on:
+  push:
+    branches:
+      - main
+jobs:
+  CI:
+    name: Deploy and Publish
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version: [18]
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.version }}
+      - name: Install node dependencies
+        run: yarn install
+      - name: Install Shopify CLI
+        run: yarn global add @shopify/cli@latest
+      - name: Deploy
+        env:
+          # Token from the Partner Dashboard
+          SHOPIFY_CLI_PARTNERS_TOKEN: ${{ secrets.SHOPIFY_CLI_PARTNERS_TOKEN }}
+          COMMIT_URL: ${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}
+          # .env content after a deploy
+          SHOPIFY_API_KEY: ${{ secrets.LIVE_SHOPIFY_API_KEY }}
+        run: shopify app deploy -f --source-control-url "$COMMIT_URL"
